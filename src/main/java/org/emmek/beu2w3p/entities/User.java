@@ -24,7 +24,7 @@ public class User {
     private String name;
     private String surname;
     @ManyToMany
-    @JoinTable(name = "users_events",
+    @JoinTable(name = "events_users",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id"))
     @ToString.Exclude
