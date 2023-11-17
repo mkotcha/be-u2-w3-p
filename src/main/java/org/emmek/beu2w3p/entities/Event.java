@@ -24,6 +24,7 @@ public class Event {
     private String description;
     private LocalDate date;
     private String location;
+    private String picture;
     @Column(name = "max_participants")
     private int maxParticipants;
     @ManyToMany
