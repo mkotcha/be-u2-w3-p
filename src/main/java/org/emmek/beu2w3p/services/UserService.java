@@ -1,6 +1,7 @@
 package org.emmek.beu2w3p.services;
 
 import org.emmek.beu2w3p.entities.Event;
+import org.emmek.beu2w3p.entities.Role;
 import org.emmek.beu2w3p.entities.User;
 import org.emmek.beu2w3p.exceptions.NotFoundException;
 import org.emmek.beu2w3p.exceptions.ParticipatingException;
@@ -46,18 +47,19 @@ public class UserService {
 
     public User setAdmin(long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
-        user.setRole("ADMIN");
+        user.setRole(Role.ADMIN);
         return userRepository.save(user);
     }
 
     public User setUser(long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
-        user.setRole("USER");
+        user.setRole(Role.USER);
         return userRepository.save(user);
     }
 
-    public Event bookEvent(User user, long eventId) {
+    public Event bookEvent(User authUser, long eventId) {
         Event event = eventRepository.findById(eventId).orElseThrow(() -> new NotFoundException(eventId));
+        User user = userRepository.findById(authUser.getId()).orElseThrow(() -> new NotFoundException(authUser.getId()));
         if (event.getUsers().contains(user)) {
             throw new ParticipatingException(event, user);
         } else {
@@ -85,8 +87,9 @@ public class UserService {
         }
     }
 
-    public Event unBookEvent(User user, long eventId) {
+    public Event unBookEvent(User authUser, long eventId) {
         Event event = eventRepository.findById(eventId).orElseThrow(() -> new NotFoundException(eventId));
+        User user = userRepository.findById(authUser.getId()).orElseThrow(() -> new NotFoundException(authUser.getId()));
         if (event.getUsers().contains(user)) {
             event.getUsers().remove(user);
             return eventRepository.save(event);

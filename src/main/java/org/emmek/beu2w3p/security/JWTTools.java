@@ -19,7 +19,6 @@ public class JWTTools {
                 .setIssuedAt(new Date(System.currentTimeMillis())) // Data di emissione (IAT - Issued At)
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7)) // Data di scadenza (Expiration Date)
                 .signWith(Keys.hmacShaKeyFor(secret.getBytes())).compact();
-
     }
 
     public void verifyToken(String token) {

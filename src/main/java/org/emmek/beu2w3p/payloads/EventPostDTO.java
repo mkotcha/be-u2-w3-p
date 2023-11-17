@@ -1,9 +1,6 @@
 package org.emmek.beu2w3p.payloads;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public record EventPostDTO(
         @NotNull(message = "Title cannot be null")
@@ -24,7 +21,8 @@ public record EventPostDTO(
         @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Date not valid (yyyy-mm-dd)")
         String date,
 
-        @NotNull(message = "Max participants cannot be null")
+        @Min(value = 2, message = "Max participants must be greater than 1")
+        @Max(value = 1000, message = "Max participants must be less than 1000")
         int maxParticipants
 
 ) {

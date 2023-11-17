@@ -79,4 +79,11 @@ public class UserController {
     public User setAdmin(@PathVariable long id) {
         return userService.setAdmin(id);
     }
+
+    @GetMapping("/{id}/set-user")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public User setUser(@PathVariable long id) {
+        return userService.setUser(id);
+    }
+    
 }

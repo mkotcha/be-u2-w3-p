@@ -12,5 +12,4 @@ import java.util.Date;
 public class ErrorPayload {
     private String message;
     private Date timestamp;
-
 }

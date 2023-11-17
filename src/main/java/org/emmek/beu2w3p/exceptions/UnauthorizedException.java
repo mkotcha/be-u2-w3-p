@@ -1,6 +1,5 @@
 package org.emmek.beu2w3p.exceptions;
 
-
 import lombok.Getter;
 
 @Getter
