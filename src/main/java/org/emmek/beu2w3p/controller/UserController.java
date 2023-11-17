@@ -33,6 +33,14 @@ public class UserController {
         return user;
     }
 
+    @GetMapping("/me/events")
+    public Page<Event> getEvents(@AuthenticationPrincipal User user,
+                                 @RequestParam(defaultValue = "0") int page,
+                                 @RequestParam(defaultValue = "10") int size,
+                                 @RequestParam(defaultValue = "id") String sort) {
+        return userService.getEvents(user, page, size, sort);
+    }
+
     @GetMapping("/me/events/{id}/book")
     public Event bookEvent(@AuthenticationPrincipal User user, @PathVariable long id) {
         return userService.bookEvent(user, id);
@@ -85,5 +93,5 @@ public class UserController {
     public User setUser(@PathVariable long id) {
         return userService.setUser(id);
     }
-    
+
 }

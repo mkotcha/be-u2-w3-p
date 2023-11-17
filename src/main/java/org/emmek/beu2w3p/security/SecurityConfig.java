@@ -36,7 +36,7 @@ public class SecurityConfig {
 
     @Bean
     PasswordEncoder getEncoder() {
-        return new BCryptPasswordEncoder(11);// per settare la velocità di esecuzione di bcrypt (+ è alto il numero, + lento l'algoritmo, + sicure sarnno le pw)
+        return new BCryptPasswordEncoder(11);
     }
 
 }
