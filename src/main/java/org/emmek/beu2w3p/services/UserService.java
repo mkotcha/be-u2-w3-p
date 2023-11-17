@@ -108,4 +108,9 @@ public class UserService {
             throw new ParticipatingException("NOT PARTICIPATING!");
         }
     }
+
+    public Page<Event> getEvents(User user, int page, int size, String sort) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+        return eventRepository.findByUsers(user, pageable);
+    }
 }
