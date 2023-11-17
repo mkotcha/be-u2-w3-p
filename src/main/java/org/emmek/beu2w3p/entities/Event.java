@@ -1,6 +1,7 @@
 package org.emmek.beu2w3p.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,5 +31,6 @@ public class Event {
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     @ToString.Exclude
+    @JsonIgnore
     private List<User> users;
 }

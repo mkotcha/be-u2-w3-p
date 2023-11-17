@@ -13,7 +13,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties({"password", "authorities", "enabled", "credentialsNonExpired", "accountNonExpired", "accountNonLocked"})
+@JsonIgnoreProperties({"password", "events", "authorities", "enabled", "credentialsNonExpired", "accountNonExpired", "accountNonLocked"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,7 @@ public class User {
     private String password;
     private String name;
     private String surname;
+    private String role;
     @ManyToMany
     @JoinTable(name = "events_users",
             joinColumns = @JoinColumn(name = "user_id"),
