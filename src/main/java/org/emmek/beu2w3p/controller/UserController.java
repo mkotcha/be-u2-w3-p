@@ -85,4 +85,5 @@ public class UserController {
     public User setUser(@PathVariable long id) {
         return userService.setUser(id);
     }
+    
 }
