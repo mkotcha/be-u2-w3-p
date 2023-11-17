@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +29,7 @@ public class EventController {
 
     @PostMapping("")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Event createEvent(@RequestBody EventPostDTO body, BindingResult validation) {
+    public Event createEvent(@RequestBody @Validated EventPostDTO body, BindingResult validation) {
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
         } else {
@@ -61,6 +62,4 @@ public class EventController {
     public String uploadExample(@PathVariable long id, @RequestParam("picture") MultipartFile body) throws IOException {
         return eventService.uploadPicture(id, body);
     }
-
-
 }

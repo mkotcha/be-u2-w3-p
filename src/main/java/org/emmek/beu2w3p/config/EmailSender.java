@@ -24,14 +24,12 @@ public class EmailSender {
     }
 
     public void sendRegistrationEmail(User user) throws IOException {
-
         Email from = new Email(sender);
         String subject = "\n" + "Registration successful!";
         Email to = new Email(user.getEmail());
         Content content = new Content("text/plain",
                 "Welcome " + user.getName() + " registration confirmed!");
         Mail mail = new Mail(from, subject, to, content);
-
         SendGrid sg = new SendGrid(apikey);
         Request request = new Request();
         request.setMethod(Method.POST);

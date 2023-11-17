@@ -19,7 +19,6 @@ public record UserPostDTO(
         @NotEmpty(message = "Surname cannot be empty")
         @Size(min = 3, max = 30, message = "Surname must be between 3 e 30 chars")
         String surname
-
 ) {
 
 

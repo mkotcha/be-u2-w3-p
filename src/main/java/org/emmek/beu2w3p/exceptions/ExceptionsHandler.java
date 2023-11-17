@@ -3,6 +3,7 @@ package org.emmek.beu2w3p.exceptions;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -63,6 +64,18 @@ public class ExceptionsHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED) // 405
     public ErrorPayload handleMethodNotAllowed(HttpRequestMethodNotSupportedException e) {
+        return new ErrorPayload(e.getMessage(), new Date());
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST) // 400
+    public ErrorPayload handleHttpMessageNotReadable(HttpMessageNotReadableException e) {
+        return new ErrorPayload(e.getMessage(), new Date());
+    }
+
+    @ExceptionHandler(ParticipatingException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST) // 400
+    public ErrorPayload handleParticipatingException(ParticipatingException e) {
         return new ErrorPayload(e.getMessage(), new Date());
     }
 

@@ -26,15 +26,11 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // Disabilitiamo alcuni comportamenti di default
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.csrf(AbstractHttpConfigurer::disable);
         http.formLogin(AbstractHttpConfigurer::disable);
-
         http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(exceptionsHandlerFilter, JWTAuthFilter.class);
-
-//        http.authorizeHttpRequests(request -> request.requestMatchers("/**").permitAll());
         return http.build();
     }
 
